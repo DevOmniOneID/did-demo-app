@@ -38,30 +38,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(100, 100, 100, 0.7);
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10;
         }
 
-        .qr-row {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-
-        .qr-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-
         .qr-container {
             position: relative;
-            width: 110px;
-            height: 110px;
+            width: 220px;
+            height: 220px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -69,15 +56,15 @@
         }
 
         .qr-container img {
-            width: 90px;
-            height: 90px;
+            width: 200px;
+            height: 200px;
         }
 
         .qr-corner {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 2px solid #cccccc;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #ff0000;
         }
 
         .top-left {
@@ -108,13 +95,6 @@
             border-top: none;
         }
 
-        .qr-label {
-            margin-top: 8px;
-            font-size: 14px;
-            color: #ffffff;
-            text-align: center;
-            }
-
         .qr-message {
             position: absolute;
             bottom: 30px;
@@ -128,48 +108,29 @@
 <body>
     <div class="mobile-container">
         <div class="qr-overlay">
-          <div class="qr-row">
-            <!-- VP -->
-            <div class="qr-item" onclick="navigateTo('qr_scan_vp.html')">
-              <div class="qr-container">
-                <img src="image/qrcode_vp.png" alt="QR Code 1">
+            <div class="qr-container">
+                <img src="image/qrcode_vp.png" alt="QR Code">
                 <div class="qr-corner top-left"></div>
                 <div class="qr-corner top-right"></div>
                 <div class="qr-corner bottom-left"></div>
                 <div class="qr-corner bottom-right"></div>
-              </div>
-              <div class="qr-label">Submit mDL</div>
             </div>
-    
-            <!-- ZKP Proof -->
-            <div class="qr-item" onclick="navigateTo('qr_scan_proof.html')">
-              <div class="qr-container">
-                <img src="image/qrcode_vp.png" alt="QR Code 2">
-                <div class="qr-corner top-left"></div>
-                <div class="qr-corner top-right"></div>
-                <div class="qr-corner bottom-left"></div>
-                <div class="qr-corner bottom-right"></div>
-              </div>
-              <div class="qr-label">Submit National ID</div>
-            </div>
-          </div>
-          <div class="qr-message">Select a QR code to submit</div>
         </div>
+        <div class="qr-message">Scanning QR Code for ZKP Proof submission...</div>
     </div>
+
     <script>
         window.onpopstate = function(e) { 
             console.log(`${JSON.stringify(e.state)} | ${location.origin} | ${location.pathname}`);
         }
 
         var state = {};
-        var url = location.origin + '/select_qr';
+        var url = location.origin + '/scan_qr_proof';
         history.pushState(state, null, url);
 
-        function navigateTo(page) {
-            // document.cookie = "issuer_init=true; path=/; max-age=3600";
-            // document.cookie = "issuer_init_for_profile=true; path=/; max-age=3600";
-            setPage(page);
-        }
+        setTimeout(function() {
+            setPage('proof_request_profile.html');
+        }, 3000);
     </script>
 </body>
 </html>

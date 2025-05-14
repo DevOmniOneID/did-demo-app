@@ -275,7 +275,7 @@
             const userInit = getCookieValue('user_init');
             const vcResult = getCookieValue('vc_result');
 
-            if (userInit  === 'false' && issuerInit === 'true' && vcResult === 'true') {
+            if (userInit  === 'true' && issuerInit === 'true' && vcResult === 'true') {
                 setPage('qr_scan_vp.html');
             } else if (userInit  === 'true' && issuerInit === 'true' && vcResult === 'true'){
                 setPage('select_qr.html');
