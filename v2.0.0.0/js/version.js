@@ -2,20 +2,18 @@
     const version = "v2.0.0.0";
 
     window.addEventListener("DOMContentLoaded", function () {
-        const footerVersion = document.createElement("div");
-        footerVersion.textContent = version;
+        const versionDiv = document.createElement("div");
+        versionDiv.textContent = version;
 
-        footerVersion.style.position = "fixed";
-        footerVersion.style.bottom = "0";
-        footerVersion.style.left = "0";
-        footerVersion.style.width = "100%";
-        footerVersion.style.backgroundColor = "#000";
-        footerVersion.style.color = "#fff";
-        footerVersion.style.textAlign = "center";
-        footerVersion.style.padding = "5px 0";
-        footerVersion.style.fontSize = "12px";
-        footerVersion.style.zIndex = "9999";
+        versionDiv.style.backgroundColor = "#000";
+        versionDiv.style.color = "#fff";
+        versionDiv.style.textAlign = "center";
+        versionDiv.style.padding = "6px 0";
+        versionDiv.style.fontSize = "12px";
 
-        document.body.appendChild(footerVersion);
+        const mobileContainer = document.querySelector(".mobile-container");
+        if (mobileContainer) {
+            mobileContainer.appendChild(versionDiv);
+        }
     });
 })();
