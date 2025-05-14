@@ -272,6 +272,7 @@
         // });
         document.getElementById('scan-qr-button').addEventListener('click', function() {
             const issuerInit = getCookieValue('issuer_init');
+            const userInit = getCookieValue('user_init');
             const vcResult = getCookieValue('vc_result');
 
             if (issuerInit === 'true' && vcResult === 'true') {
