@@ -10,10 +10,13 @@
         versionDiv.style.textAlign = "center";
         versionDiv.style.padding = "6px 0";
         versionDiv.style.fontSize = "12px";
+        versionDiv.style.width = "375px";
+        versionDiv.style.borderBottomLeftRadius = "20px";
+        versionDiv.style.borderBottomRightRadius = "20px";
 
         const mobileContainer = document.querySelector(".mobile-container");
-        if (mobileContainer) {
-            mobileContainer.appendChild(versionDiv);
+        if (mobileContainer && mobileContainer.parentElement) {
+            mobileContainer.parentElement.insertBefore(versionDiv, mobileContainer.nextSibling);
         }
     });
 })();
