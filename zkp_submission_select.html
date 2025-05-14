@@ -210,45 +210,6 @@
         var url = location.origin + '/zkp_submission_select';
         history.replaceState(state, null, url);
 
-        const base58Chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-
-        function generateBase58RandomString(length) {
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += base58Chars.charAt(Math.floor(Math.random() * base58Chars.length));
-            }
-            return result;
-        }
-
-        function setDIDCookie(didValue) {
-            document.cookie = `did=${didValue}; path=/; max-age=31536000`;
-        }
-
-        function getDIDFromCookie() {
-            const name = 'did=';
-            const decodedCookie = decodeURIComponent(document.cookie);
-            const ca = decodedCookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return null;
-        }
-
-        window.addEventListener('DOMContentLoaded', function () {
-            let did = getDIDFromCookie();
-            if (!did) {
-                did = generateBase58RandomString(20);
-                setDIDCookie(did);
-            }
-            document.getElementById('did-display').textContent = `did:omn:${did}`;
-        });
-
         document.getElementById('cancel-button').addEventListener('click', function() {
             setPage('main.html');
         });
