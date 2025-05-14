@@ -274,6 +274,9 @@
             const issuerInit = getCookieValue('issuer_init');
             const userInit = getCookieValue('user_init');
             const vcResult = getCookieValue('vc_result');
+            console.log("issuerInit : " + issuerInit);
+            console.log("userInit : " + userInit);
+            console.log("vcResult : " + vcResult);
 
             if (userInit  === 'false' && issuerInit === 'true' && vcResult === 'true') {
                 setPage('qr_scan_vp.html');

@@ -259,8 +259,10 @@
 
         document.querySelectorAll('.toggle-eye').forEach(img => {
         img.addEventListener('click', () => {
-            const isOpen = img.src.includes('eye_open.png');
-            img.src = isOpen ? 'image/eye_close.png' : 'image/eye_open.png';
+            // const isOpen = img.src.includes('eye_open.png');
+            // img.src = isOpen ? 'image/eye_close.png' : 'image/eye_open.png';
+            const isOpen = img.src.includes(getBasePath() + 'eye_open.png');
+            img.src = isOpen ? getBasePath() + 'image/eye_close.png' : getBasePath() + 'image/eye_open.png';            
         });
     });
     </script>
