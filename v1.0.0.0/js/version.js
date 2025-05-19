@@ -124,7 +124,7 @@
       //     document.getElementById("md-modal").style.display = "block";
       //   })
       //   .catch(err => alert(err.message));
-      fetch(basePath + "test.md")
+      fetch(basePath + "demoapp_guide_ko.md")
         .then(res => res.text())
         .then(md => {
           const renderer = new marked.Renderer();
