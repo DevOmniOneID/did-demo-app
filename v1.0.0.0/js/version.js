@@ -1,6 +1,6 @@
 (function () {
   const version = "v1.0.0.0";
-  const basePath = window.location.origin + "/did-demo-app/v1.0.0.0/";
+  const basePath = window.location.origin + "/did-demo-app/v1.0.0.0/guide/";
 
   window.addEventListener("DOMContentLoaded", function () {
     const wrapper = document.querySelector(".container-wrapper");
@@ -91,7 +91,7 @@
 
     const versionText = document.createElement("span");
     versionText.id = "version-label";
-    versionText.textContent = `버전: ${version}`;
+    versionText.textContent = `${version}`;
     versionDiv.appendChild(versionText);
 
     const guideButton = document.createElement("button");
