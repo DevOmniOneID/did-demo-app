@@ -171,40 +171,41 @@
 <body>
     <div class="container-wrapper">
         <div class="mobile-container">
-        <div class="titlebar-container"></div>
-        <div class="header">
-            <img src="image/user_icon.png" alt="User Icon">
-            <div class="text">
-                <span>welcome back</span>
-                <span id="user-name"></span>
+            <div class="titlebar-container"></div>
+            <div class="header">
+                <img src="image/user_icon.png" alt="User Icon">
+                <div class="text">
+                    <span>welcome back</span>
+                    <span id="user-name"></span>
+                </div>
             </div>
-        </div>
 
-        <div class="main" id="main-content">
-            <div class="info-box" id="info-box-mdl" style="display: none;" onclick="detailMdl()">
-                <img src="image/default_vc.png" alt="VC Image">
-                <div class="details">
-                    <p class="title">OpenDID Mobile Driving License</p>
-                    <p class="validdate" id="valid-until-mdl"></p>
-                    <p class="issuedate" id="issued-date-mdl"></p>
+            <div class="main" id="main-content">
+                <div class="info-box" id="info-box-mdl" style="display: none;" onclick="detailMdl()">
+                    <img src="image/default_vc.png" alt="VC Image">
+                    <div class="details">
+                        <p class="title">OpenDID Mobile Driving License</p>
+                        <p class="validdate" id="valid-until-mdl"></p>
+                        <p class="issuedate" id="issued-date-mdl"></p>
+                    </div>
                 </div>
+                
+                <div class="info-box" id="info-box-nid" style="display: none;" onclick="detailNid()">
+                    <img src="image/default_vc.png" alt="VC Image">
+                    <div class="details">
+                        <p class="title">OpenDID National ID</p>
+                        <p class="validdate" id="valid-until-nid"></p>
+                        <p class="issuedate" id="issued-date-nid"></p>
+                    </div>
+                </div>
+                
+                <h1 class="no-certificate" id="no-certificate">No certificate has been issued.</h1>
             </div>
             
-            <div class="info-box" id="info-box-nid" style="display: none;" onclick="detailNid()">
-                <img src="image/default_vc.png" alt="VC Image">
-                <div class="details">
-                    <p class="title">OpenDID National ID</p>
-                    <p class="validdate" id="valid-until-nid"></p>
-                    <p class="issuedate" id="issued-date-nid"></p>
-                </div>
+            <div class="button-container">
+                <button id="add-vc-button">ADD VC</button>
+                <button id="scan-qr-button">SCAN QR</button>
             </div>
-            
-            <h1 class="no-certificate" id="no-certificate">No certificate has been issued.</h1>
-        </div>
-        
-        <div class="button-container">
-            <button id="add-vc-button">ADD VC</button>
-            <button id="scan-qr-button">SCAN QR</button>
         </div>
     </div>
 
