@@ -6,40 +6,34 @@
     const wrapper = document.querySelector(".container-wrapper");
     if (!wrapper) return;
 
-    const versionDiv = document.createElement("div");
-    versionDiv.id = "version-bar";
-
-    const versionText = document.createElement("span");
-    versionText.textContent = `버전: ${version}`;
-    versionDiv.appendChild(versionText);
-
-    const viewButton = document.createElement("button");
-    viewButton.textContent = "데모 가이드 보기";
-    viewButton.style.marginLeft = "10px";
-    viewButton.style.padding = "4px 10px";
-    viewButton.style.fontSize = "11px";
-    viewButton.style.backgroundColor = "#ed8202";
-    viewButton.style.color = "#fff";
-    viewButton.style.border = "none";
-    viewButton.style.borderRadius = "4px";
-    viewButton.style.cursor = "pointer";
-    versionDiv.appendChild(viewButton);
-
-    wrapper.appendChild(versionDiv);
-
-    const modalHTML = `
-      <div id="md-modal" style="display:none;">
-        <div class="md-modal-backdrop"></div>
-        <div class="md-modal-content">
-          <button class="md-close-button">닫기 ✕</button>
-          <div id="md-content"></div>
-        </div>
-      </div>
-    `;
-    document.body.insertAdjacentHTML("beforeend", modalHTML);
-
     const style = document.createElement("style");
     style.textContent = `
+      #version-bar {
+        background-color: #000;
+        color: #fff;
+        padding: 6px 12px;
+        font-size: 12px;
+        width: 375px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      #version-label {
+        font-weight: bold;
+      }
+
+      #guide-button {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      /* Markdown 모달 */
       #md-modal {
         position: fixed;
         top: 0; left: 0;
@@ -80,16 +74,49 @@
         border-radius: 4px;
         cursor: pointer;
       }
+      .md-modal-content img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px 0;
+      }
       .md-modal-content h1, h2, h3 {
         color: #ed8202;
       }
     `;
     document.head.appendChild(style);
 
-    viewButton.addEventListener("click", () => {
+    const versionDiv = document.createElement("div");
+    versionDiv.id = "version-bar";
+
+    const versionText = document.createElement("span");
+    versionText.id = "version-label";
+    versionText.textContent = `버전: ${version}`;
+    versionDiv.appendChild(versionText);
+
+    const guideButton = document.createElement("button");
+    guideButton.id = "guide-button";
+    guideButton.title = "demo guide";
+    guideButton.innerHTML = "❓";
+    versionDiv.appendChild(guideButton);
+
+    wrapper.appendChild(versionDiv);
+
+    const modalHTML = `
+      <div id="md-modal" style="display:none;">
+        <div class="md-modal-backdrop"></div>
+        <div class="md-modal-content">
+          <button class="md-close-button">닫기 ✕</button>
+          <div id="md-content"></div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    guideButton.addEventListener("click", () => {
       fetch(basePath + "demoapp_guide_ko.md")
         .then(res => {
-          if (!res.ok) throw new Error("Markdown 파일을 불러올 수 없습니다.");
+          if (!res.ok) throw new Error("failed to Markdown file laod");
           return res.text();
         })
         .then(md => {
