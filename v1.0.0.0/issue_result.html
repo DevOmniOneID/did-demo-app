@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenDID Wallet</title>
     <script src="js/config.js"></script>
+    <script src="js/version.js"></script>
     <style>
         body {
             margin: 0;
@@ -113,10 +114,27 @@
             background-color: #d37102;
         }
 
+        .container-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #version-bar {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            width: 375px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }        
     </style>
 </head>
 <body>
-    <div class="mobile-container">
+    <div class="container-wrapper">
+        <div class="mobile-container">
         <div class="header">
             <p class="title">Success</p>
             <p class="subtitle">You can now add your certificate</p>

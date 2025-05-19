@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <title>OpenDID Wallet</title>
     <script src="js/config.js"></script>
+    <script src="js/version.js"></script>
     <style>
         body {
             margin: 0;
@@ -88,46 +89,64 @@
         .button-container button:hover {
             background-color: #d37102;
         }
+        .container-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #version-bar {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            width: 375px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }        
     </style>
   </head>
   <body>
-    <div class="mobile-container">
-        <div class="label">
-            <p>User Information</p>
-        </div>
+    <div class="container-wrapper">
+        <div class="mobile-container">
+            <div class="label">
+                <p>User Information</p>
+            </div>
 
-        <div class="input">
-            <p>
-                First Name
-                <span class="color-error">*</span>
-            </p>
-            <input
-                id="firstName"
-                type="text"
-                placeholder="please enter the contents."
-                required
-            />
-        </div>
-        <div id="firstNameError" class="error-valid-message"></div>
+            <div class="input">
+                <p>
+                    First Name
+                    <span class="color-error">*</span>
+                </p>
+                <input
+                    id="firstName"
+                    type="text"
+                    placeholder="please enter the contents."
+                    required
+                />
+            </div>
+            <div id="firstNameError" class="error-valid-message"></div>
 
-        <div class="input">
-            <p>
-                Last Name
-                <span class="color-error">*</span>
-            </p>
-            <input
-                id="lastName"
-                type="text"
-                placeholder="please enter the contents."
-                required
-            />
-        </div>
-        <div id="lastNameError" class="error-valid-message"></div>
+            <div class="input">
+                <p>
+                    Last Name
+                    <span class="color-error">*</span>
+                </p>
+                <input
+                    id="lastName"
+                    type="text"
+                    placeholder="please enter the contents."
+                    required
+                />
+            </div>
+            <div id="lastNameError" class="error-valid-message"></div>
 
-        <p class="color-info">* Indicates required input.</p>
+            <p class="color-info">* Indicates required input.</p>
 
-        <div class="button-container">
-            <button id="save-button">Save</button>
+            <div class="button-container">
+                <button id="save-button">Save</button>
+            </div>
         </div>
     </div>
     <script>

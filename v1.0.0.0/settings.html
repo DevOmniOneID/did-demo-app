@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/titlebar.js"></script>
     <script src="js/config.js"></script>
+    <script src="js/version.js"></script>
     <style>
         body {
             margin: 0;
@@ -58,10 +59,27 @@
             color: #666666;
             margin-top: 5px;
         }
+        .container-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #version-bar {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            width: 375px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }        
     </style>
 </head>
 <body>
-    <div class="mobile-container">
+    <div class="container-wrapper">
+        <div class="mobile-container">
         <div class="titlebar-backkey-container"></div>
         <ul class="list-view">
             <li class="list-item">

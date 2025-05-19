@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenDID Wallet</title>
     <script src="js/config.js"></script>
+    <script src="js/version.js"></script>
     <style>
         body {
             margin: 0;
@@ -123,37 +124,55 @@
             text-align: center;
             z-index: 20;
         }
+        .container-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #version-bar {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            width: 375px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }        
     </style>
 </head>
 <body>
-    <div class="mobile-container">
-        <div class="qr-overlay">
-          <div class="qr-row">
-            <!-- VP -->
-            <div class="qr-item" onclick="navigateTo('qr_scan_proof.html')">
-              <div class="qr-container">
-                <img src="image/qrcode_vp.png" alt="QR Code 1">
-                <div class="qr-corner top-left"></div>
-                <div class="qr-corner top-right"></div>
-                <div class="qr-corner bottom-left"></div>
-                <div class="qr-corner bottom-right"></div>
-              </div>
-              <div class="qr-label">Submit mDL</div>
+    <div class="container-wrapper">
+        <div class="mobile-container">
+            <div class="qr-overlay">
+            <div class="qr-row">
+                <!-- VP -->
+                <div class="qr-item" onclick="navigateTo('qr_scan_proof.html')">
+                <div class="qr-container">
+                    <img src="image/qrcode_vp.png" alt="QR Code 1">
+                    <div class="qr-corner top-left"></div>
+                    <div class="qr-corner top-right"></div>
+                    <div class="qr-corner bottom-left"></div>
+                    <div class="qr-corner bottom-right"></div>
+                </div>
+                <div class="qr-label">Submit mDL</div>
+                </div>
+        
+                <!-- ZKP Proof -->
+                <div class="qr-item" onclick="navigateTo('qr_scan_vp.html')">
+                <div class="qr-container">
+                    <img src="image/qrcode_vp.png" alt="QR Code 2">
+                    <div class="qr-corner top-left"></div>
+                    <div class="qr-corner top-right"></div>
+                    <div class="qr-corner bottom-left"></div>
+                    <div class="qr-corner bottom-right"></div>
+                </div>
+                <div class="qr-label">Submit National ID</div>
+                </div>
             </div>
-    
-            <!-- ZKP Proof -->
-            <div class="qr-item" onclick="navigateTo('qr_scan_vp.html')">
-              <div class="qr-container">
-                <img src="image/qrcode_vp.png" alt="QR Code 2">
-                <div class="qr-corner top-left"></div>
-                <div class="qr-corner top-right"></div>
-                <div class="qr-corner bottom-left"></div>
-                <div class="qr-corner bottom-right"></div>
-              </div>
-              <div class="qr-label">Submit National ID</div>
+            <div class="qr-message">Select a QR code to submit</div>
             </div>
-          </div>
-          <div class="qr-message">Select a QR code to submit</div>
         </div>
     </div>
     <script>
