@@ -33,7 +33,6 @@
         cursor: pointer;
       }
 
-      /* Markdown 모달 */
       #md-modal {
         position: fixed;
         top: 0; left: 0;
@@ -114,17 +113,31 @@
     document.body.insertAdjacentHTML("beforeend", modalHTML);
 
     guideButton.addEventListener("click", () => {
-      fetch(basePath + "demoapp_guide_ko.md")
-        .then(res => {
-          if (!res.ok) throw new Error("failed to Markdown file laod");
-          return res.text();
-        })
+      // fetch(basePath + "demoapp_guide_ko.md")
+      //   .then(res => {
+      //     if (!res.ok) throw new Error("failed to Markdown file laod");
+      //     return res.text();
+      //   })
+      //   .then(md => {
+      //     const html = marked.parse(md);
+      //     document.getElementById("md-content").innerHTML = html;
+      //     document.getElementById("md-modal").style.display = "block";
+      //   })
+      //   .catch(err => alert(err.message));
+      fetch(basePath + "test.md")
+        .then(res => res.text())
         .then(md => {
-          const html = marked.parse(md);
+          const renderer = new marked.Renderer();
+          renderer.image = function(href, title, text) {
+            const fixedHref = href.startsWith("http")
+              ? href
+              : basePath + href;
+            return `<img src="${fixedHref}" alt="${text}" ${title ? `title="${title}"` : ""} />`;
+          };
+          const html = marked.parse(md, { renderer });
           document.getElementById("md-content").innerHTML = html;
           document.getElementById("md-modal").style.display = "block";
-        })
-        .catch(err => alert(err.message));
+        });
     });
 
     document.addEventListener("click", (e) => {
