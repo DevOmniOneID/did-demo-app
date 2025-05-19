@@ -18,7 +18,7 @@
         wrapper.appendChild(button);
   
         button.addEventListener("click", function () {
-          fetch("README.md")
+          fetch("did-demo-app/README.md")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Markdown 파일을 불러올 수 없습니다.");
