@@ -1,5 +1,6 @@
 (function () {
     const version = "v1.0.0.0";
+    const basePath = window.location.origin + "/did-demo-app/v1.0.0.0/";
   
     window.addEventListener("DOMContentLoaded", function () {
       const wrapper = document.querySelector(".container-wrapper");
@@ -18,7 +19,7 @@
         wrapper.appendChild(button);
   
         button.addEventListener("click", function () {
-          fetch("did-demo-app/README.md")
+          fetch(basePath + "README.md")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("Markdown 파일을 불러올 수 없습니다.");
