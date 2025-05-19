@@ -6,16 +6,13 @@
     const wrapper = document.querySelector(".container-wrapper");
     if (!wrapper) return;
 
-    // ─── 버전 바 ───────────────────────
     const versionDiv = document.createElement("div");
     versionDiv.id = "version-bar";
 
-    // 텍스트 노드: 버전명
     const versionText = document.createElement("span");
     versionText.textContent = `버전: ${version}`;
     versionDiv.appendChild(versionText);
 
-    // 버튼: test.md 보기
     const viewButton = document.createElement("button");
     viewButton.textContent = "데모 가이드 보기";
     viewButton.style.marginLeft = "10px";
@@ -29,6 +26,65 @@
     versionDiv.appendChild(viewButton);
 
     wrapper.appendChild(versionDiv);
+
+    const modalHTML = `
+      <div id="md-modal" style="display:none;">
+        <div class="md-modal-backdrop"></div>
+        <div class="md-modal-content">
+          <button class="md-close-button">닫기 ✕</button>
+          <div id="md-content"></div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #md-modal {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+      }
+      .md-modal-backdrop {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .md-modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80%;
+        overflow-y: auto;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        font-family: Arial, sans-serif;
+      }
+      .md-close-button {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        background: #ed8202;
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .md-modal-content h1, h2, h3 {
+        color: #ed8202;
+      }
+    `;
+    document.head.appendChild(style);
 
     viewButton.addEventListener("click", () => {
       fetch(basePath + "demoapp_guide_ko.md")
@@ -44,11 +100,13 @@
         .catch(err => alert(err.message));
     });
 
-    const closeBtn = document.querySelector(".md-close-button");
-    if (closeBtn) {
-      closeBtn.addEventListener("click", () => {
+    document.addEventListener("click", (e) => {
+      if (
+        e.target.matches(".md-close-button") ||
+        e.target.matches(".md-modal-backdrop")
+      ) {
         document.getElementById("md-modal").style.display = "none";
-      });
-    }
+      }
+    });
   });
 })();
