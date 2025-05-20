@@ -125,20 +125,41 @@
       //   })
       //   .catch(err => alert(err.message));
       fetch(basePath + "demoapp_guide_ko.md")
-        .then(res => res.text())
+        .then(res => {
+          if (!res.ok) throw new Error("Markdown 파일을 불러올 수 없습니다.");
+          return res.text();
+        })
         .then(md => {
           const renderer = new marked.Renderer();
+      
           renderer.image = function(href, title, text) {
-            const rawHref = typeof href === 'string' ? href : '';
-            const fixedHref = rawHref.match(/^https?:\/\//)
+            const rawHref = (typeof href === 'string' && href.trim()) ? href.trim() : '';
+            if (!rawHref) {
+              console.warn("이미지 href가 비어있음:", href);
+              return '';
+            }
+      
+            const isAbsolute = /^https?:\/\//i.test(rawHref);
+            const isRooted = rawHref.startsWith('/');
+            const fixedHref = isAbsolute
+              ? rawHref
+              : isRooted
               ? rawHref
               : basePath + rawHref;
+      
             return `<img src="${fixedHref}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
           };
+      
           const html = marked.parse(md, { renderer });
+      
           document.getElementById("md-content").innerHTML = html;
           document.getElementById("md-modal").style.display = "block";
+        })
+        .catch(err => {
+          console.error("Markdown 로딩 오류:", err);
+          alert("데모 가이드를 불러오지 못했습니다.");
         });
+    
     });
 
     document.addEventListener("click", (e) => {
