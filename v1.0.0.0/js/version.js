@@ -125,33 +125,29 @@
       //   })
       //   .catch(err => alert(err.message));
       fetch(basePath + "demoapp_guide_ko.md")
-        .then(res => {
-          if (!res.ok) throw new Error("Markdown 파일을 불러올 수 없습니다.");
-          return res.text();
-        })
+        .then(res => res.text())
         .then(md => {
           const renderer = new marked.Renderer();
       
-          renderer.image = function(href, title, text) {
-            const rawHref = (typeof href === 'string' && href.trim()) ? href.trim() : '';
-            if (!rawHref) {
-              console.warn("이미지 href가 비어있음:", href);
+          renderer.image = function (token) {
+            const href = typeof token.href === 'string' ? token.href.trim() : '';
+            if (!href) {
+              console.warn("이미지 href가 비어있음:", token);
               return '';
             }
       
-            const isAbsolute = /^https?:\/\//i.test(rawHref);
-            const isRooted = rawHref.startsWith('/');
+            const isAbsolute = /^https?:\/\//i.test(href);
+            const isRooted = href.startsWith('/');
             const fixedHref = isAbsolute
-              ? rawHref
+              ? href
               : isRooted
-              ? rawHref
-              : basePath + rawHref;
+              ? href
+              : basePath + href;
       
-            return `<img src="${fixedHref}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
+            return `<img src="${fixedHref}" alt="${token.text || ''}" ${token.title ? `title="${token.title}"` : ''} />`;
           };
       
           const html = marked.parse(md, { renderer });
-      
           document.getElementById("md-content").innerHTML = html;
           document.getElementById("md-modal").style.display = "block";
         })
