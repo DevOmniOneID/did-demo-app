@@ -129,10 +129,11 @@
         .then(md => {
           const renderer = new marked.Renderer();
           renderer.image = function(href, title, text) {
-            const fixedHref = href.startsWith("http")
-              ? href
-              : basePath + href;
-            return `<img src="${fixedHref}" alt="${text}" ${title ? `title="${title}"` : ""} />`;
+            const rawHref = typeof href === 'string' ? href : '';
+            const fixedHref = rawHref.match(/^https?:\/\//)
+              ? rawHref
+              : basePath + rawHref;
+            return `<img src="${fixedHref}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
           };
           const html = marked.parse(md, { renderer });
           document.getElementById("md-content").innerHTML = html;
