@@ -98,7 +98,7 @@
     guideButton.title = "demo guide";
 
     const guideImg = document.createElement("img");
-    guideImg.src = basePath + "guide-icon.png";
+    guideImg.src = basePath + "guide_icon.png";
     guideImg.alt = "Guide";
     guideImg.style.width = "16px";
     guideImg.style.height = "16px";
