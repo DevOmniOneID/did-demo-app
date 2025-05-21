@@ -104,7 +104,6 @@
     guideImg.style.height = "16px";
     
     guideButton.appendChild(guideImg);
-    
     versionDiv.appendChild(guideButton);
 
     wrapper.appendChild(versionDiv);
@@ -113,7 +112,7 @@
       <div id="md-modal" style="display:none;">
         <div class="md-modal-backdrop"></div>
         <div class="md-modal-content">
-          <button class="md-close-button">닫기 ✕</button>
+          <button class="md-close-button">Close ✕</button>
           <div id="md-content"></div>
         </div>
       </div>
