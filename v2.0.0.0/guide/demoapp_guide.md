@@ -23,6 +23,8 @@ User registration consists of **Step 1 to Step 3**.
 - Enter the **PIN set during registration** to proceed with the signature.
 - Once the signature is complete, the **DID Document registration is finalized**, and the app navigates to the main screen.
 
+User registration is completed through the procedures from **step 1 to step 3**.
+
 ---
 
 ## Main Screen
