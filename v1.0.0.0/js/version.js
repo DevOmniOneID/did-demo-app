@@ -131,7 +131,7 @@
       //     document.getElementById("md-modal").style.display = "block";
       //   })
       //   .catch(err => alert(err.message));
-      fetch(basePath + "demoapp_guide_ko.md")
+      fetch(basePath + "demoapp_guide.md")
         .then(res => res.text())
         .then(md => {
           const renderer = new marked.Renderer();
