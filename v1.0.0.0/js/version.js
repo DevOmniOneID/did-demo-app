@@ -96,7 +96,15 @@
     const guideButton = document.createElement("button");
     guideButton.id = "guide-button";
     guideButton.title = "demo guide";
-    guideButton.innerHTML = "❓";
+
+    const guideImg = document.createElement("img");
+    guideImg.src = basePath + "guide-icon.png";
+    guideImg.alt = "Guide";
+    guideImg.style.width = "16px";
+    guideImg.style.height = "16px";
+    
+    guideButton.appendChild(guideImg);
+    
     versionDiv.appendChild(guideButton);
 
     wrapper.appendChild(versionDiv);
