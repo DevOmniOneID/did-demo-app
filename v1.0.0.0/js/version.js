@@ -6,6 +6,7 @@
     const wrapper = document.querySelector(".container-wrapper");
     if (!wrapper) return;
 
+    // 스타일 정의
     const style = document.createElement("style");
     style.textContent = `
       #version-bar {
@@ -20,17 +21,17 @@
         justify-content: space-between;
         align-items: center;
       }
-
       #version-label {
         font-weight: bold;
       }
-
       #guide-button {
         background: none;
         border: none;
-        color: #fff;
-        font-size: 16px;
         cursor: pointer;
+      }
+      #guide-button img {
+        width: 16px;
+        height: 16px;
       }
 
       #md-modal {
@@ -85,6 +86,7 @@
     `;
     document.head.appendChild(style);
 
+    // 상단 바
     const versionDiv = document.createElement("div");
     versionDiv.id = "version-bar";
 
@@ -100,14 +102,12 @@
     const guideImg = document.createElement("img");
     guideImg.src = basePath + "guide_icon.png";
     guideImg.alt = "Guide";
-    guideImg.style.width = "16px";
-    guideImg.style.height = "16px";
-    
     guideButton.appendChild(guideImg);
     versionDiv.appendChild(guideButton);
 
     wrapper.appendChild(versionDiv);
 
+    // 모달 삽입
     const modalHTML = `
       <div id="md-modal" style="display:none;">
         <div class="md-modal-backdrop"></div>
@@ -119,30 +119,27 @@
     `;
     document.body.insertAdjacentHTML("beforeend", modalHTML);
 
+    // 가이드 로딩
     guideButton.addEventListener("click", () => {
-      // fetch(basePath + "demoapp_guide_ko.md")
-      //   .then(res => {
-      //     if (!res.ok) throw new Error("failed to Markdown file laod");
-      //     return res.text();
-      //   })
-      //   .then(md => {
-      //     const html = marked.parse(md);
-      //     document.getElementById("md-content").innerHTML = html;
-      //     document.getElementById("md-modal").style.display = "block";
-      //   })
-      //   .catch(err => alert(err.message));
-      fetch(basePath + "demoapp_guide.md")
+      const pageName = window.location.pathname.split("/").pop(); // ex: main.html
+
+      fetch(basePath + "demoapp_detail_guide_ko.md")
         .then(res => res.text())
         .then(md => {
+          const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##|$)`, "m");
+          const match = md.match(regex);
+
+          if (!match) {
+            alert("이 페이지에 대한 가이드가 없습니다.");
+            return;
+          }
+
+          const section = match[1].trim();
+
           const renderer = new marked.Renderer();
-      
           renderer.image = function (token) {
             const href = typeof token.href === 'string' ? token.href.trim() : '';
-            if (!href) {
-              console.warn("이미지 href가 비어있음:", token);
-              return '';
-            }
-      
+            if (!href) return '';
             const isAbsolute = /^https?:\/\//i.test(href);
             const isRooted = href.startsWith('/');
             const fixedHref = isAbsolute
@@ -150,11 +147,11 @@
               : isRooted
               ? href
               : basePath + href;
-      
+
             return `<img src="${fixedHref}" alt="${token.text || ''}" ${token.title ? `title="${token.title}"` : ''} />`;
           };
-      
-          const html = marked.parse(md, { renderer });
+
+          const html = marked.parse(section, { renderer });
           document.getElementById("md-content").innerHTML = html;
           document.getElementById("md-modal").style.display = "block";
         })
@@ -162,9 +159,9 @@
           console.error("Markdown 로딩 오류:", err);
           alert("데모 가이드를 불러오지 못했습니다.");
         });
-    
     });
 
+    // 모달 닫기
     document.addEventListener("click", (e) => {
       if (
         e.target.matches(".md-close-button") ||
