@@ -150,7 +150,10 @@
             renderer.image = function (href, title, text) {
               if (!href) return '';
             
-              const imagePath = basePath + href.replace(/^.\//, ''); // './images/xxx.png' → 'images/xxx.png'
+              // './images/xxx.png' 또는 'images/xxx.png' → 'https://devomnioneid.github.io/did-demo-app/v1.0.0.0/guide/images/xxx.png'
+              const cleanedHref = href.replace(/^\.?\//, ''); // './images/a.png' or 'images/a.png' → 'images/a.png'
+              const imagePath = basePath + cleanedHref;
+            
               return `<img src="${imagePath}" alt="${text || ''}"${title ? ` title="${title}"` : ''} style="max-width: 100%;" />`;
             };
         
