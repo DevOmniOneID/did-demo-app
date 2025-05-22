@@ -124,46 +124,46 @@
       const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);
     
       fetch(basePath + "demoapp_detail_guide_ko.md")
-        .then(res => res.text())
-        .then(md => {
-          const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
-          const match = md.match(regex);
+      .then(res => res.text())
+      .then(md => {
+        const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
+        const match = md.match(regex);
     
-          if (!match) {
-            alert("이 페이지에 대한 가이드가 없습니다.");
-            return;
+        if (!match) {
+          alert("이 페이지에 대한 가이드가 없습니다.");
+          return;
+        }
+    
+        let section = match[1].trim();
+        section = section.replace(/^##.*\n/, '').trim();
+    
+        const renderer = new marked.Renderer();
+        renderer.image = function (href, title, text) {
+          href = typeof href === 'string' ? href.trim() : '';
+          console.log("img path:", href);
+          if (!href) return '';
+    
+          const isAbsolute = /^https?:\/\//i.test(href);
+          if (isAbsolute) {
+            return `<img src="${href}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
           }
     
-          let section = match[1].trim();
-          section = section.replace(/^##.*\n/, '').trim();
+          href = href.replace(/^(\.\/)?images\//, '');
+          const fixedHref = basePath + "images/" + href;
+          return `<img src="${fixedHref}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
+        };
     
-          const renderer = new marked.Renderer();
-          renderer.image = function (href, title, text) {
-            href = typeof href === 'string' ? href.trim() : '';
-            console.log("img path:", href);
-            if (!href) return '';
+        marked.setOptions({ renderer });
     
-            const isAbsolute = /^https?:\/\//i.test(href);
-            if (isAbsolute) {
-              return `<img src="${href}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
-            }
+        const html = marked.parse(section);
+        document.getElementById("md-content").innerHTML = html;
+        document.getElementById("md-modal").style.display = "block";
+      })
+      .catch(err => {
+        console.error("Markdown 로딩 오류:", err);
+        alert("데모 가이드를 불러오지 못했습니다.");
+      });
     
-            href = href.replace(/^(\.\/)?images\//, '');
-            const fixedHref = basePath + "images/" + href;
-            return `<img src="${fixedHref}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
-          };
-    
-          // 📌 전역 렌더러 등록
-          marked.use({ renderer });
-    
-          const html = marked.parse(section);  // 이제 renderer는 확실히 반영됨
-          document.getElementById("md-content").innerHTML = html;
-          document.getElementById("md-modal").style.display = "block";
-        })
-        .catch(err => {
-          console.error("Markdown 로딩 오류:", err);
-          alert("데모 가이드를 불러오지 못했습니다.");
-        });
     });
 
     // 모달 닫기
