@@ -121,12 +121,16 @@
 
     // 가이드 로딩
     guideButton.addEventListener("click", () => {
-      const pageName = window.location.pathname.split("/").pop(); // ex: main.html
+      // const pageName = window.location.pathname.split("/").pop(); // ex: main.html
+      // 현재 페이지 URL의 마지막 경로에서 sectionId 추출
+      const pathname = window.location.pathname;
+      const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);  // 예: 'user_info'
 
+      // 마크다운 파일에서 해당 섹션만 추출 및 렌더링
       fetch(basePath + "demoapp_detail_guide_ko.md")
         .then(res => res.text())
         .then(md => {
-          const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##|$)`, "m");
+          const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|\\n?$)`, "m");
           const match = md.match(regex);
 
           if (!match) {
@@ -134,7 +138,7 @@
             return;
           }
 
-          const section = match[1].trim();
+          const section = `## ${pageName}\n` + match[1].trim(); // 섹션 제목 포함
 
           const renderer = new marked.Renderer();
           renderer.image = function (token) {

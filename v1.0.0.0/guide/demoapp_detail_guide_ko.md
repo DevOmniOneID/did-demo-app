@@ -1,13 +1,13 @@
 # Demo App 가이드 (V1.0.0.0)
 
-## index.html
+## step1
    
 <img src="./images/index.png" width="400" height="700" />
 
 - Open DID Wallet' 화면이 나타나며, 사용자의 등록 과정을 단계별로 안내해 줍니다. 현재 Step 1을 진행 중임을 확인하고, `Next` 버튼을 클릭합니다.
 
 
-## user_info.html
+## user_info
 
 <img src="./images/user_info.png" width="400" height="700" />
 
