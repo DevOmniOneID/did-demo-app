@@ -142,7 +142,7 @@
     
         // 🔧 이미지 경로 수동 치환
         html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
-          return match.replace(/src=["'][^"']+["']/, `src="${basePath}images2/${filename}"`);
+          return match.replace(/src=["'][^"']+["']/, `src="${basePath}images/${filename}"`);
         });
     
         // 모달에 삽입
