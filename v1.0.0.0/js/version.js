@@ -145,17 +145,25 @@
             // 첫 줄이 ## 로 시작하면 그 줄 삭제
             section = section.replace(/^##.*\n/, '').trim();
         
-            const renderer = new marked.Renderer();
-
-            renderer.image = function (href, title, text) {
-              if (!href) return '';
-            
-              // './images/xxx.png' 또는 'images/xxx.png' → 'https://devomnioneid.github.io/did-demo-app/v1.0.0.0/guide/images/xxx.png'
-              const cleanedHref = href.replace(/^\.?\//, ''); // './images/a.png' or 'images/a.png' → 'images/a.png'
-              const imagePath = basePath + cleanedHref;
-              console.log("img path : " + imagePath);
-              return `<img src="${imagePath}" alt="${text || ''}"${title ? ` title="${title}"` : ''} style="max-width: 100%;" />`;
-            };
+          const renderer = new marked.Renderer();
+      
+          renderer.image = function (token) {
+            const href = typeof token.href === 'string' ? token.href.trim() : '';
+            if (!href) {
+              console.warn("이미지 href가 비어있음:", token);
+              return '';
+            }
+      
+            const isAbsolute = /^https?:\/\//i.test(href);
+            const isRooted = href.startsWith('/');
+            const fixedHref = isAbsolute
+              ? href
+              : isRooted
+              ? href
+              : basePath + "images/" + href;
+      
+            return `<img src="${fixedHref}" alt="${token.text || ''}" ${token.title ? `title="${token.title}"` : ''} />`;
+          };
         
             const html = marked.parse(section, { renderer });
             document.getElementById("md-content").innerHTML = html;
