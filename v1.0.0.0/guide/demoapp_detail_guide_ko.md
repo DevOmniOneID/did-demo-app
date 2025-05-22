@@ -2,14 +2,14 @@
 
 ## step1
    
-<img src="./images/index.png" width="400" height="700" />
+<img src="images/index.png" width="400" height="700" />
 
 - Open DID Wallet' 화면이 나타나며, 사용자의 등록 과정을 단계별로 안내해 줍니다. 현재 Step 1을 진행 중임을 확인하고, `Next` 버튼을 클릭합니다.
 
 
 ## user_info
 
-<img src="./images/user_info.png" width="400" height="700" />
+<img src="images/user_info.png" width="400" height="700" />
 
 - 'User Information' 화면이 나타나며 사용자의 정보를 입력하게 됩니다. 입력 항목은 `First Name` 과 `Last Name`이며, 아래와 같은 용도로 사용됩니다:
    - 사용자의 PII를 생성할 때 salt로 사용됩니다.
