@@ -137,25 +137,15 @@
         let section = match[1].trim();
         section = section.replace(/^##.*\n/, '').trim();
     
-        const renderer = new marked.Renderer();
-        renderer.image = function (href, title, text) {
-          href = typeof href === 'string' ? href.trim() : '';
-          console.log("img path:", href);
-          if (!href) return '';
+        // 마크다운을 HTML로 렌더링
+        let html = marked.parse(section);
     
-          const isAbsolute = /^https?:\/\//i.test(href);
-          if (isAbsolute) {
-            return `<img src="${href}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
-          }
+        // 🔧 이미지 경로 수동 치환
+        html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
+          return match.replace(/src=["'][^"']+["']/, `src="${basePath}images2/${filename}"`);
+        });
     
-          href = href.replace(/^(\.\/)?images\//, '');
-          const fixedHref = basePath + "images/" + href;
-          return `<img src="${fixedHref}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
-        };
-    
-        marked.setOptions({ renderer });
-    
-        const html = marked.parse(section);
+        // 모달에 삽입
         document.getElementById("md-content").innerHTML = html;
         document.getElementById("md-modal").style.display = "block";
       })
@@ -163,6 +153,7 @@
         console.error("Markdown 로딩 오류:", err);
         alert("데모 가이드를 불러오지 못했습니다.");
       });
+    
     
     });
 
