@@ -153,7 +153,7 @@
               // './images/xxx.png' 또는 'images/xxx.png' → 'https://devomnioneid.github.io/did-demo-app/v1.0.0.0/guide/images/xxx.png'
               const cleanedHref = href.replace(/^\.?\//, ''); // './images/a.png' or 'images/a.png' → 'images/a.png'
               const imagePath = basePath + cleanedHref;
-            
+              console.log("img path : " + imagePath);
               return `<img src="${imagePath}" alt="${text || ''}"${title ? ` title="${title}"` : ''} style="max-width: 100%;" />`;
             };
         
