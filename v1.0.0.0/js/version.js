@@ -127,41 +127,48 @@
       const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);  // 예: 'user_info'
 
       fetch(basePath + "demoapp_detail_guide_ko.md")
-      .then(res => res.text())
-      .then(md => {
-        const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
-        const match = md.match(regex);
+          .then(res => res.text())
+          .then(md => {
+            // pageName에 맞는 섹션 전체 추출
+            const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
+            const match = md.match(regex);
+        
+            if (!match) {
+              alert("이 페이지에 대한 가이드가 없습니다.");
+              return;
+            }
+        
+            let section = match[1].trim();
+        
+            // 섹션에서 첫 번째 줄(대개 빈 줄 혹은 제목 바로 아래 줄)이 ## ... 인 경우 제거
+            // 여기선 이미 제목(## pageName) 제외했으니, 추가 제목이 있을 경우 제거
+            // 첫 줄이 ## 로 시작하면 그 줄 삭제
+            section = section.replace(/^##.*\n/, '').trim();
+        
+            const renderer = new marked.Renderer();
+        
+            renderer.image = function (href, title, text) {
+              if (!href) return '';
+              const isAbsolute = /^https?:\/\//i.test(href);
+              const isRooted = href.startsWith('/');
+              const fixedHref = isAbsolute
+                ? href
+                : isRooted
+                ? href
+                : basePath + href.replace(/^\.?\//, '');
+        
+              return `<img src="${fixedHref}" alt="${text || ''}"${title ? ` title="${title}"` : ''} />`;
+            };
+        
+            const html = marked.parse(section, { renderer });
+            document.getElementById("md-content").innerHTML = html;
+            document.getElementById("md-modal").style.display = "block";
+          })
+          .catch(err => {
+            console.error("Markdown 로딩 오류:", err);
+            alert("데모 가이드를 불러오지 못했습니다.");
+          });
     
-        if (!match) {
-          alert("이 페이지에 대한 가이드가 없습니다.");
-          return;
-        }
-    
-        const section = match[1].trim();
-    
-        const renderer = new marked.Renderer();
-    
-        renderer.image = function (href, title, text) {
-          if (!href) return '';
-          const isAbsolute = /^https?:\/\//i.test(href);
-          const isRooted = href.startsWith('/');
-          const fixedHref = isAbsolute
-            ? href
-            : isRooted
-            ? href
-            : basePath + href.replace(/^\.?\//, '');  // './images' 앞의 ./ 제거
-    
-          return `<img src="${fixedHref}" alt="${text || ''}"${title ? ` title="${title}"` : ''} />`;
-        };
-    
-        const html = marked.parse(section, { renderer });
-        document.getElementById("md-content").innerHTML = html;
-        document.getElementById("md-modal").style.display = "block";
-      })
-      .catch(err => {
-        console.error("Markdown 로딩 오류:", err);
-        alert("데모 가이드를 불러오지 못했습니다.");
-      });
     
     });
 
