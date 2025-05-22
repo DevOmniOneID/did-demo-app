@@ -78,7 +78,7 @@
         max-width: 100%;
         height: auto;
         display: block;
-        margin: 10px 0;
+        margin: 10px auto;
       }
       .md-modal-content h1, h2, h3 {
         color: #ed8202;
