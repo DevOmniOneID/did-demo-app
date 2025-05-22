@@ -146,18 +146,12 @@
             section = section.replace(/^##.*\n/, '').trim();
         
             const renderer = new marked.Renderer();
-        
+
             renderer.image = function (href, title, text) {
               if (!href) return '';
-              const isAbsolute = /^https?:\/\//i.test(href);
-              const isRooted = href.startsWith('/');
-              const fixedHref = isAbsolute
-                ? href
-                : isRooted
-                ? href
-                : basePath + href.replace(/^\.?\//, '');
-        
-              return `<img src="${fixedHref}" alt="${text || ''}"${title ? ` title="${title}"` : ''} />`;
+            
+              const imagePath = basePath + href.replace(/^.\//, ''); // './images/xxx.png' → 'images/xxx.png'
+              return `<img src="${imagePath}" alt="${text || ''}"${title ? ` title="${title}"` : ''} style="max-width: 100%;" />`;
             };
         
             const html = marked.parse(section, { renderer });
