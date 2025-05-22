@@ -119,65 +119,51 @@
     `;
     document.body.insertAdjacentHTML("beforeend", modalHTML);
 
-    // 가이드 로딩
     guideButton.addEventListener("click", () => {
-      // const pageName = window.location.pathname.split("/").pop(); // ex: main.html
-      // 현재 페이지 URL의 마지막 경로에서 sectionId 추출
       const pathname = window.location.pathname;
-      const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);  // 예: 'user_info'
-
+      const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);
+    
       fetch(basePath + "demoapp_detail_guide_ko.md")
-          .then(res => res.text())
-          .then(md => {
-            // pageName에 맞는 섹션 전체 추출
-            const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
-            const match = md.match(regex);
-        
-            if (!match) {
-              alert("이 페이지에 대한 가이드가 없습니다.");
-              return;
-            }
-        
-            let section = match[1].trim();
-        
-            // 섹션에서 첫 번째 줄(대개 빈 줄 혹은 제목 바로 아래 줄)이 ## ... 인 경우 제거
-            // 여기선 이미 제목(## pageName) 제외했으니, 추가 제목이 있을 경우 제거
-            // 첫 줄이 ## 로 시작하면 그 줄 삭제
-            section = section.replace(/^##.*\n/, '').trim();
-        
+        .then(res => res.text())
+        .then(md => {
+          const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
+          const match = md.match(regex);
+    
+          if (!match) {
+            alert("이 페이지에 대한 가이드가 없습니다.");
+            return;
+          }
+    
+          let section = match[1].trim();
+          section = section.replace(/^##.*\n/, '').trim();
+    
           const renderer = new marked.Renderer();
-      
-          renderer.image = function (token) {
-            let href = typeof token.href === 'string' ? token.href.trim() : '';
-            console.log("img path : " + href);
-            if (!href) {
-              console.warn("이미지 href가 비어있음:", token);
-              return '';
-            }
-          
+          renderer.image = function (href, title, text) {
+            href = typeof href === 'string' ? href.trim() : '';
+            console.log("img path:", href);
+            if (!href) return '';
+    
             const isAbsolute = /^https?:\/\//i.test(href);
             if (isAbsolute) {
-              return `<img src="${href}" alt="${token.text || ''}" ${token.title ? `title="${token.title}"` : ''} />`;
+              return `<img src="${href}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
             }
-          
-            // './images/xxx.png' 또는 'images/xxx.png' 제거
+    
             href = href.replace(/^(\.\/)?images\//, '');
-          
             const fixedHref = basePath + "images/" + href;
-          
-            return `<img src="${fixedHref}" alt="${token.text || ''}" ${token.title ? `title="${token.title}"` : ''} />`;
+            return `<img src="${fixedHref}" alt="${text || ''}" ${title ? `title="${title}"` : ''} />`;
           };
-        
-            const html = marked.parse(section, { renderer });
-            document.getElementById("md-content").innerHTML = html;
-            document.getElementById("md-modal").style.display = "block";
-          })
-          .catch(err => {
-            console.error("Markdown 로딩 오류:", err);
-            alert("데모 가이드를 불러오지 못했습니다.");
-          });
     
+          // 📌 전역 렌더러 등록
+          marked.use({ renderer });
     
+          const html = marked.parse(section);  // 이제 renderer는 확실히 반영됨
+          document.getElementById("md-content").innerHTML = html;
+          document.getElementById("md-modal").style.display = "block";
+        })
+        .catch(err => {
+          console.error("Markdown 로딩 오류:", err);
+          alert("데모 가이드를 불러오지 못했습니다.");
+        });
     });
 
     // 모달 닫기
