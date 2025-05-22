@@ -1,13 +1,13 @@
 # Demo App 가이드 (V1.0.0.0)
 ## step1
-<img src="images/index.png" width="300" height="500" />
+<img src="images/index.png" width="600" height="500" />
 - 'Open DID Wallet' 화면이 나타나며, 사용자의 등록 과정을 단계별로 안내해 줍니다.  
 - 현재 Step 1을 진행 중임을 확인하고, `Next` 버튼을 클릭합니다.
 - Step 1은 사용자의 정보입력 후 월렛의 잠금타입을 설정하는 절차입니다.
 
 ## user_info
 <!-- <img src="images/user_info.png" width="300" height="600" /> -->
-![메인화면](images/user_info.png.png)
+![메인화면](images/user_info.png)
 - 'User Information' 화면이 나타나며 사용자의 정보를 입력하게 됩니다.  
 - 입력 항목은 `First Name`과 `Last Name`이며, 아래와 같은 용도로 사용됩니다:  
   - 사용자의 PII를 생성할 때 salt로 사용됩니다.  
