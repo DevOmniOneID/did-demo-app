@@ -213,7 +213,7 @@
                 const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);
 
                 
-                fetch(fullUrl + "demoapp_guide_ko.md")
+                fetch(fullUrl + "demoapp_guide.md")
                 .then(res => res.text())
                 .then(md => {
                     let html = marked.parse(md);

@@ -1,4 +1,5 @@
-# Demo App 가이드 (V1.0.0.0)
+# Demo App 가이드 (V2.0.0.0)
+
 ## step1
 <img src="images/index.png" width="600" height="500" />
 

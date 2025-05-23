@@ -120,7 +120,7 @@
       const pathname = window.location.pathname;
       const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);
     
-      fetch(basePath + "demoapp_detail_guide_ko.md")
+      fetch(basePath + "demoapp_detail_guide.md")
       .then(res => res.text())
       .then(md => {
         const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
