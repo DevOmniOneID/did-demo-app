@@ -106,15 +106,10 @@
 
         /* Modal styles */
         #md-modal {
-            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.6);
-            justify-content: center;
-            align-items: center;
             z-index: 9999;
         }
         .md-modal-backdrop {
@@ -124,22 +119,30 @@
             background: rgba(0, 0, 0, 0.5);
         }
         .md-modal-content {
-            background: #fff;
-            max-width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            max-width: 600px;
             max-height: 80%;
-            padding: 20px;
-            border-radius: 10px;
             overflow-y: auto;
-            position: relative;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            font-family: Arial, sans-serif;
         }
-
         .md-close-button {
             position: absolute;
             top: 10px;
-            right: 10px;
-            background: none;
+            right: 14px;
+            background: #ed8202;
+            color: #fff;
             border: none;
-            font-size: 18px;
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 4px;
             cursor: pointer;
         }
         .md-modal-content img {
