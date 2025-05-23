@@ -157,7 +157,7 @@
                 <p id="first-name"></p>
                 <br>
                 <p>Birth date</p>
-                <p>2024-01-01</p>
+                <p>2020-01-01</p>
                 <br>
                 <p>Address</p>
                 <p>Korea</p>
@@ -166,11 +166,17 @@
                 <p>123-12345-123</p>
                 <br>
                 <p><b><font color="#ed8202">Zero-Knowledge Proof</font></b></p>
-                <p>Address</p>
-                <p>Seoul</p>
+                <p>region</p>
+                <p>seoul</p>
                 <br>
-                <p>Birth date</p>
-                <p>2024-01-01</p>
+                <p>name</p>
+                <p id="name"></p>
+                <br>
+                <p>citizenship</p>
+                <p>citizen</p>
+                <br>
+                <p>birthdate</p>
+                <p>20200101</p>
                 <br>
             </div>
             <div class="button-container">
@@ -203,6 +209,8 @@
 
         document.getElementById('last-name').textContent = getCookieValue('last_name');
         
+        document.getElementById('name').textContent = (getCookieValue('first_name') || '') + ' ' + (getCookieValue('last_name') || '');
+
         document.getElementById('delete').addEventListener('click', function() {
             alert("Not supported");
         });

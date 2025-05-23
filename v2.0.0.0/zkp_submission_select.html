@@ -50,17 +50,36 @@
             font-weight: bold;
             color: #ed8202;
             margin: 0 20 0 0;
+            padding-bottom: 0;
             text-align: left;
         }
 
         .header .subtitle {
             font-size: 14px;
-            color: #000000;
+            color: #ed8202;
             margin: 0 0 0 0;
             padding-right: 20px;
             text-align: right;
         }
+        .subtitle-with-icon {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 20px;
+            margin-top: 2px;
+        }
 
+        .subtitle-with-icon .subtitle {
+            margin: 0 0 0 2px;
+            font-size: 14px;
+            color: #ed8202;
+            text-align: right;
+        }
+
+        .eye-icon {
+            width: 18px;
+            height: 18px;
+        }
         .subject {
             width: 100%;
             background-color: #ffffff;
@@ -173,7 +192,10 @@
         <div class="mobile-container">
             <div class="header">
                 <p class="title">ZKP submission selection</p>
-                <p class="subtitle">눈알가이드...</p>
+                <div class="subtitle-with-icon">
+                    <img src="image/eye_open.png" alt="eye icon" class="eye-icon">
+                    <p class="subtitle">Tap the image to hide or show attributes</p>
+                </div>
             </div>
             <div class="content-area">
                 <div class="subject">
