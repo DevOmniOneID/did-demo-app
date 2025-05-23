@@ -63,89 +63,42 @@
 
 - 하단에는 다음 두 개의 버튼이 존재합니다:
   - ADD VC: 사용자 주도(User Initiated) 방식으로 VC를 발급합니다.
-  - SCAN QR: 발급기관 주도(Issuer Initiated) 방식으로 **VC 발급 또는 VP 제출**을 위한 QR 코드를 스캔합니다.
+  - SCAN QR: 발급기관 주도(Issuer Initiated) 방식으로  VC 발급 또는 VP 제출을 위한 QR 코드를 스캔합니다.
 
-## pin_auth
-<img src="./images/user_register_5.jpg" width="600" height="500"/>
-- 'User Information' 화면에서 현재 Step 2가 진행 중임을 확인하고, `Next` 클릭.
-<img src="./images/user_register_6.jpg" width="600" height="500"/>
-- 'Please register a PIN' 문구가 표시되며 6자리 PIN을 두 번 입력합니다.
-<img src="./images/user_register_7.jpg" width="600" height="500"/>
-- 'Would you like to register additional fingerprints?' 팝업에서 `YES` 클릭.
-<img src="./images/user_register_8.jpg" width="600" height="500"/>
-- 'please input a Lock/Unlock PIN' 문구에 따라 PIN을 두 번 입력합니다.
-<img src="./images/user_register_9.jpg" width="600" height="500"/>
-- 앱 OS에서 지문을 등록하는 팝업이 나타나며, 지문을 입력합니다.
-- 'User Information' 화면에서 Step 3가 진행 중임을 확인하고 `Next` 클릭.
-<img src="./images/user_register_10.jpg" width="600" height="500"/>
-- 'Please input a PIN' 화면에서 6자리 PIN을 입력합니다.
-<img src="./images/user_register_11.jpg" width="600" height="500"/>
-- 앱 OS에서 지문을 입력하여 인증합니다.
-- 메인 페이지로 이동하며 'No certificate has been issued.' 문구가 출력됩니다.
-<img src="./images/user_register_12.jpg" width="600" height="500"/>
+- 본 데모에서는 두가지의 VC를 발급받을 수 있습니다.
+  - National ID: User Initiated 방식
+  - mDL (Mobile Driving License): Issuer Initiated 방식
 
 
-### 6.2.1. MDL(Mobile Driver License) VC 발급 테스트
-- 웹 브라우저에서 데모 서버 메인 페이지 접속 (http://192.168.1.1:8099/home)
-<img src="./images/mdl_vc_issue_1.png" height="400"/>
-- `Enter Information` 클릭 후, 사용자 등록 시 입력한 정보와 동일하게 입력  
-- Identification 정보도 입력
-<img src="./images/mdl_vc_issue_2.png" height="400"/>
-- `Save` 클릭 → 저장된 데이터는 MDL VC 발급에 사용됨
-- `VC issuance` 버튼 클릭
-<img src="./images/mdl_vc_issue_3.png" height="400"/>
-- `Issuance of ID card` 클릭 → QR 팝업이 나타남
-<img src="./images/mdl_vc_issue_4.png" height="400"/>
-- `DID CA` 앱 실행 → PIN 입력하여 잠금 해제
-<img src="./images/mdl_vc_issue_5.jpg" height="400"/>
-- `SCAN QR` 클릭 → 카메라로 QR 스캔
-<img src="./images/mdl_vc_issue_6.jpg" height="400"/>
-- 'Issuance certificate Information' 확인 후 `OK` 클릭
-<img src="./images/mdl_vc_issue_7.jpg" height="400"/>
-- 지문 인증 또는 PIN 입력하여 사용자 인증
-- 'Success' 문구와 함께 발급 성공, `OK` 클릭
-<img src="./images/mdl_vc_issue_8.jpg" height="400"/>
-- 메인 페이지로 이동 → 발급된 MDL VC 확인
-<img src="./images/mdl_vc_issue_9.jpg" height="400"/>
-- MDL VC 클릭하여 상세 정보 확인
-<img src="./images/mdl_vc_issue_10.jpg" height="400"/>
-- 데모 서버 팝업에서 `Check issuance` 클릭 → 성공 메시지 확인
-<img src="./images/mdl_vc_issue_11.png" height="400"/>
-### 6.2.2. National ID VC 발급 테스트
-- `DID CA` 앱 실행 → PIN 입력
-<img src="./images/issuer_register_1.jpg" width="600" height="500"/>
-- `ADD VC` 클릭
-<img src="./images/issuer_register_2.jpg" width="600" height="500"/>
-- National ID Plan 선택
-<img src="./images/issuer_register_3.jpg" width="600" height="500"/>
-- VC 정보 확인 후 `OK` 클릭
-<img src="./images/issuer_register_4.jpg" width="600" height="500"/>
-- Identification 정보 입력 후 `Save`
-<img src="./images/issuer_register_5.jpg" width="600" height="500"/>
-- PIN 입력
-<img src="./images/issuer_register_6.jpg" width="600" height="500"/>
-- VC 발급 성공 → `OK` 클릭
-<img src="./images/issuer_register_7.jpg" width="600" height="500"/>
-- 메인 페이지에서 National ID VC 확인 및 클릭
-<img src="./images/issuer_register_8.jpg" width="600" height="500"/>
-- VC 상세 정보 확인
-<img src="./images/issuer_register_9.jpg" width="600" height="500"/>
-## 6.3. VP 제출 테스트
-- 데모 서버 메인 페이지 접속 (http://192.168.1.1:8099/home)
-<img src="./images/vp_submit_1.png" height="400"/>
-- `VP Submission` → `Submit your ID` 클릭
-<img src="./images/vp_submit_2.png" height="400"/>
-- 'Submit a certificate' 팝업에서 QR 확인
-<img src="./images/vp_submit_3.png" height="400"/>
-- `DID CA` 앱 실행 → PIN 입력
-<img src="./images/vp_submit_4.jpg" width="600" height="500"/>
-- `SCAN QR` 클릭 → 카메라로 QR 스캔
-<img src="./images/vp_submit_5.jpg" width="600" height="500"/>
-- 'Certificate submission guide' 확인 후 `OK` 클릭
-<img src="./images/vp_submit_6.jpg" width="600" height="500"/>
-- 인증 방식 선택 후 인증 시도
-<img src="./images/vp_submit_7.jpg" width="600" height="500"/>
-- 제출 성공 후 `OK` 클릭
-<img src="./images/vp_submit_8.jpg" width="600" height="500"/>
-- 데모 서버에서 `Submission Complete` 클릭 → 완료 확인 메시지
+## add_vc
+<img src="./images/add_vc.png" width="600" height="500"/>
 
+- VC를 발급받기 위하여 발급 가능한 VC 목록에서 `National ID Plan`을 선택합니다.
+
+
+## issue_profile
+<img src="./images/issue_profile.png" width="600" height="500"/>
+
+- 발급기관, VC 이름, 발급일 등의 정보를 사용자에게 확인합니다.
+
+
+## vc_info
+<img src="./images/vc_info.png" width="600" height="500"/>
+
+- 사용자가 다음의 발급 정보를 입력하면 해당 정보를 통해 발급을 진행합니다.
+   - Birthdate
+   - Address
+   - License Number
+   - Issue Date
+
+
+## vc_authentication
+<img src="./images/vc_authentication.png" width="600" height="500"/>
+
+- 사용자 등록 시 설정한 PIN을 입력합니다.
+
+
+## issue_result
+<img src="./images/issue_result.png" width="600" height="500"/>
+
+- VC 발급 완료룰 사용자에게 확인합니다.
