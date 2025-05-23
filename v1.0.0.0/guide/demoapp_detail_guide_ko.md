@@ -35,28 +35,35 @@
 
 ## finger_popup
 <img src="./images/finger_popup.png" width="600" height="500"/>
+
 - 서명을 위한 인증 수단으로 사용자의 지문 등록을 진행할지 선택하는 팝업입니다. 본 데모에서는 PIN 등록만 지원합니다.
 
 
 ## step3
 <img src="images/step3.png" width="600" height="500"/>
+
 - 'User Information' 화면에서 현재 Step 3가 진행 중임을 확인하고, `Next` 버튼을 클릭합니다.
 - Step 3는 DID Document에 사용자의 서명 후 등록하는 절차입니다.
 
 
 ## pin_authentication
 <img src="./images/pin_authentication.png" width="600" height="500"/>
+
 - DID Document 서명을 위하여 사용자의 PIN 입력을 진행합니다.
 - PIN 6자리를 입력 후 사용자의 DID Document를 등록합니다.
 
 ## main
 <img src="./images/main.png" width="600" height="500"/>
-- 최초 사용자 등록 후에는 발급받은 VC가 없기 때문에  
-  `"No certificate has been issued."` 라는 문구가 표시됩니다.
-- VC가 발급된 경우에는 **VC 목록**이 화면에 표시됩니다.
+
+- 최초 사용자 등록 후에는 발급받은 VC가 없기 때문에 `"No certificate has been issued."` 라는 문구가 표시됩니다.
+
+<img src="./images/main2.png" width="600" height="500"/>
+
+- VC가 발급된 경우에는 VC 목록이 화면에 표시됩니다.
+
 - 하단에는 다음 두 개의 버튼이 존재합니다:
-  - **ADD VC**: 사용자 주도(User Initiated) 방식으로 VC를 발급합니다.
-  - **SCAN QR**: 발급기관 주도(Issuer Initiated) 방식으로 **VC 발급 또는 VP 제출**을 위한 QR 코드를 스캔합니다.
+  - ADD VC: 사용자 주도(User Initiated) 방식으로 VC를 발급합니다.
+  - SCAN QR: 발급기관 주도(Issuer Initiated) 방식으로 **VC 발급 또는 VP 제출**을 위한 QR 코드를 스캔합니다.
 
 ## pin_auth
 <img src="./images/user_register_5.jpg" width="600" height="500"/>
