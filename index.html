@@ -168,9 +168,9 @@
             console.log(`${JSON.stringify(e.state)} | ${location.origin} | ${location.pathname}`);
         }
 
-        var state = {};
-        var url = location.origin + '/demoapp';
-        history.pushState(state, null, url);
+        // var state = {};
+        // var url = location.origin + '/demoapp';
+        // history.pushState(state, null, url);
 
         document.getElementById('v1-button').addEventListener('click', function () {
             document.cookie = "issuer_init=false; path=/; max-age=3600";
