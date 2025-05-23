@@ -6,7 +6,7 @@ When the app is launched for the first time, it creates the user’s **Wallet**.
 ---
 
 ## User Registration
-![User Registration](guide1.png)  
+![User Registration](images/guide1.png)  
 User registration consists of **Step 1 to Step 3**.
 
 ### Step 1: Enter User Information
@@ -28,7 +28,7 @@ User registration is completed through the procedures from **step 1 to step 3**.
 ---
 
 ## Main Screen
-![Main Screen](guide2.png)  
+![Main Screen](images/guide2.png)  
 - After user registration, if no VC has been issued,  
   the message `"No certificate has been issued."` will be displayed.
 - Once VCs are issued, a **list of VCs** will appear on the screen.

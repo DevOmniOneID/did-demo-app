@@ -3,7 +3,7 @@
 <img src="images/index.png" width="600" height="500" />
 
 - 'Open DID Wallet' 화면이 나타나며, 사용자의 등록 과정을 단계별로 안내해 줍니다.  
-- 현재 Step 1을 진행 중임을 확인하고, `Next` 버튼을 클릭합니다.
+- 현재 Step 1을 진행 중임을 확인하고, `NEXT` 버튼을 클릭합니다.
 - Step 1은 사용자의 정보입력 후 월렛의 잠금타입을 설정하는 절차입니다.
 
 ## user_info
@@ -23,7 +23,7 @@
 ## step2
 <img src="images/step2.png" width="600" height="500"/>
 
-- 현재 Step 2가 진행 중임을 확인하고, `Next` 버튼을 클릭합니다.
+- 현재 Step 2가 진행 중임을 확인하고, `NEXT` 버튼을 클릭합니다.
 - Step 2는 DID Document 생성 및 인증 수단 등록하는 절차입니다.
 
 
@@ -42,7 +42,7 @@
 ## step3
 <img src="images/step3.png" width="600" height="500"/>
 
-- 현재 Step 3가 진행 중임을 확인하고, `Next` 버튼을 클릭합니다.
+- 현재 Step 3가 진행 중임을 확인하고, `NEXT` 버튼을 클릭합니다.
 - Step 3는 DID Document에 사용자의 서명 후 등록하는 절차입니다.
 
 

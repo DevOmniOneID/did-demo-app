@@ -6,7 +6,7 @@
 ---
 
 ## 사용자 등록
-![사용자등록](guide1.png)
+![사용자등록](images/guide1.png)
 
 사용자 등록은 **step1에서 step3의** 절차로 구성됩니다.
 
@@ -29,7 +29,7 @@
 ---
 
 ## 메인화면
-![메인화면](guide2.png)
+![메인화면](images/guide2.png)
 - 최초 사용자 등록 후에는 발급받은 VC가 없기 때문에  
   `"No certificate has been issued."` 라는 문구가 표시됩니다.
 - VC가 발급된 경우에는 **VC 목록**이 화면에 표시됩니다.
