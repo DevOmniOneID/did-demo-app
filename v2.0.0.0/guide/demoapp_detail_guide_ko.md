@@ -60,6 +60,7 @@
 <img src="./images/main2.png" width="600" height="500"/>
 
 - VC가 발급된 경우에는 VC 목록이 화면에 표시됩니다.
+- 본데모에서는 mDL에 ZKP Credential이 포함되어 있기때문에 포함여부도 확인 할 수 있습니다. 
 
 - 하단에는 다음 두 개의 버튼이 존재합니다:
   - ADD VC: 사용자 주도(User Initiated) 방식으로 VC를 발급합니다.
@@ -112,6 +113,12 @@
 
 - VC 발급 완료룰 사용자에게 확인합니다.
 
+## select_qr
+<img src="./images/select_qr.png" width="600" height="500"/>
+
+- 제출 할 VP 또는 ZKP Proof에 대한 QR코드를 선택합니다.
+- 본데모에서는 QR코드를 선택하는것으로 대체하였으며 실제로는 해당 QR코드를 스캔하게 됩니다.
+
 
 ## scan_qr_vp
 <img src="./images/scan_qr_vp.png" width="600" height="500"/>
@@ -138,10 +145,33 @@
 - VP 제출 완료룰 사용자에게 확인합니다.
 
 
+## scan_qr_proof
+<img src="./images/scan_qr_proof.png" width="600" height="500"/>
+
+- ZKP Proof 제출을 위하여 제출용 QR 코드를 스캔합니다.
+- 본데모에서는 실제 스캔을 하지 않고 스캔하는 화면을 보여줍니다.
+
+
+## proof_request_profile
+<img src="./images/proof_request_profile.png" width="600" height="500"/>
+
+- 제출할 ZKP attribute의 정보를 사용자에게 확인합니다.
+
+
+## zkp_submission_select
+<img src="./images/zkp_submission_select.png" width="600" height="500"/>
+
+- ZKP attribute의 정보를 사용자에게 확인합니다.
+- region, name, citizenship에 대하여 숨김 설정을 할 수 있습니다.
+- 제출 시 해당 정보가 노출 되지 않습니다.
+
+
+
 ## detail_mdl
 <img src="./images/detail_mdl.png" width="600" height="500"/>
 
 - 발급받은 mDL의 상세정보를 확인 할 수 있습니다.
+- 본데모에서는 발급받은 mdl에 ZKP Credential을 포함합니다. 
 
 
 ## detail_nid

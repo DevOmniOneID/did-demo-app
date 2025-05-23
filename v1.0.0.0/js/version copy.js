@@ -20,17 +20,17 @@
         justify-content: space-between;
         align-items: center;
       }
+
       #version-label {
         font-weight: bold;
       }
+
       #guide-button {
         background: none;
         border: none;
+        color: #fff;
+        font-size: 16px;
         cursor: pointer;
-      }
-      #guide-button img {
-        width: 16px;
-        height: 16px;
       }
 
       #md-modal {
@@ -77,7 +77,7 @@
         max-width: 100%;
         height: auto;
         display: block;
-        margin: 10px auto;
+        margin: 10px 0;
       }
       .md-modal-content h1, h2, h3 {
         color: #ed8202;
@@ -100,6 +100,9 @@
     const guideImg = document.createElement("img");
     guideImg.src = basePath + "guide_icon.png";
     guideImg.alt = "Guide";
+    guideImg.style.width = "16px";
+    guideImg.style.height = "16px";
+    
     guideButton.appendChild(guideImg);
     versionDiv.appendChild(guideButton);
 
@@ -117,39 +120,48 @@
     document.body.insertAdjacentHTML("beforeend", modalHTML);
 
     guideButton.addEventListener("click", () => {
-      const pathname = window.location.pathname;
-      const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);
-    
-      fetch(basePath + "demoapp_detail_guide_ko.md")
-      .then(res => res.text())
-      .then(md => {
-        const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
-        const match = md.match(regex);
-    
-        if (!match) {
-          alert("이 페이지에 대한 가이드가 없습니다.");
-          return;
-        }
-    
-        let section = match[1].trim();
-        section = section.replace(/^##.*\n/, '').trim();
-    
-        // 마크다운을 HTML로 렌더링
-        let html = marked.parse(section);
-    
-        // 🔧 이미지 경로 수동 치환
-        html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
-          return match.replace(/src=["'][^"']+["']/, `src="${basePath}images/${filename}"`);
+      // fetch(basePath + "demoapp_guide_ko.md")
+      //   .then(res => {
+      //     if (!res.ok) throw new Error("failed to Markdown file laod");
+      //     return res.text();
+      //   })
+      //   .then(md => {
+      //     const html = marked.parse(md);
+      //     document.getElementById("md-content").innerHTML = html;
+      //     document.getElementById("md-modal").style.display = "block";
+      //   })
+      //   .catch(err => alert(err.message));
+      fetch(basePath + "demoapp_guide.md")
+        .then(res => res.text())
+        .then(md => {
+          const renderer = new marked.Renderer();
+      
+          renderer.image = function (token) {
+            const href = typeof token.href === 'string' ? token.href.trim() : '';
+            if (!href) {
+              console.warn("이미지 href가 비어있음:", token);
+              return '';
+            }
+      
+            const isAbsolute = /^https?:\/\//i.test(href);
+            const isRooted = href.startsWith('/');
+            const fixedHref = isAbsolute
+              ? href
+              : isRooted
+              ? href
+              : basePath + href;
+      
+            return `<img src="${fixedHref}" alt="${token.text || ''}" ${token.title ? `title="${token.title}"` : ''} />`;
+          };
+      
+          const html = marked.parse(md, { renderer });
+          document.getElementById("md-content").innerHTML = html;
+          document.getElementById("md-modal").style.display = "block";
+        })
+        .catch(err => {
+          console.error("Markdown 로딩 오류:", err);
+          alert("데모 가이드를 불러오지 못했습니다.");
         });
-    
-        // 모달에 삽입
-        document.getElementById("md-content").innerHTML = html;
-        document.getElementById("md-modal").style.display = "block";
-      })
-      .catch(err => {
-        console.error("Markdown 로딩 오류:", err);
-        alert("데모 가이드를 불러오지 못했습니다.");
-      });
     
     });
 
