@@ -142,7 +142,7 @@
 ## verify_result
 <img src="./images/verify_result.png" width="600" height="500"/>
 
-- VP 제출 완료룰 사용자에게 확인합니다.
+- 제출 완료룰 사용자에게 확인합니다.
 
 
 ## scan_qr_proof
