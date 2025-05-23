@@ -198,17 +198,6 @@
             fetch(fullUrl + "demoapp_guide_ko.md")
             .then(res => res.text())
             .then(md => {
-                const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
-                const match = md.match(regex);
-
-                if (!match) {
-                alert("이 페이지에 대한 가이드가 없습니다.");
-                return;
-                }
-
-                let section = match[1].trim();
-                section = section.replace(/^##.*\n/, '').trim();
-
                 let html = marked.parse(section);
 
                 html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
