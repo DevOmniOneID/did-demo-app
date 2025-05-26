@@ -216,7 +216,7 @@
             const fullUrl = `${window.location.origin}/did-demo-app/${docPath}`;
 
             const loadGuide = () => {
-            const mdFile = currentLang === "ko" ? "demoapp_detail_guide_ko.md" : "demoapp_guide.md";
+            const mdFile = currentLang === "ko" ? "demoapp_guide_ko.md" : "demoapp_guide.md";
 
             fetch(fullUrl + mdFile)
                 .then(res => res.text())
