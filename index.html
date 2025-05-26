@@ -176,10 +176,14 @@
     <!-- Modal -->
     <div id="md-modal" class="md-modal-backdrop">
         <div class="md-modal-content">
-        <button class="md-close-button">Close ✕</button>
-        <div id="md-content"></div>
+          <select id="lang-select" style="position: absolute; top: 10px; left: 14px; font-size: 14px;">
+            <option value="en" selected>English</option>
+            <option value="ko">Korean</option>
+          </select>
+          <button class="md-close-button">Close ✕</button>
+          <div id="md-content" style="margin-top: 40px;"></div>
         </div>
-    </div>
+      </div>
 
     <script>
         window.onpopstate = function(e) { 
@@ -204,32 +208,41 @@
             setPage('v2.0.0.0/index.html');
         });
 
+        let currentLang = "en"; // default language
+
         document.querySelectorAll('.guide-icon').forEach(icon => {
-            icon.addEventListener('click', function () {
-                const docPath = this.getAttribute('data-doc');
-                const fullUrl = `${window.location.origin}/did-demo-app/${docPath}`;
+        icon.addEventListener('click', function () {
+            const docPath = this.getAttribute('data-doc');
+            const fullUrl = `${window.location.origin}/did-demo-app/${docPath}`;
 
-                const pathname = window.location.pathname;
-                const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);
+            const loadGuide = () => {
+            const mdFile = currentLang === "ko" ? "demoapp_detail_guide_ko.md" : "demoapp_guide.md";
 
-                
-                fetch(fullUrl + "demoapp_guide.md")
+            fetch(fullUrl + mdFile)
                 .then(res => res.text())
                 .then(md => {
-                    let html = marked.parse(md);
-
-                    html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
+                let html = marked.parse(md);
+                html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
                     return match.replace(/src=["'][^"']+["']/, `src="${fullUrl}images/${filename}"`);
-                    });
-
-                    document.getElementById("md-content").innerHTML = html;
-                    document.getElementById("md-modal").style.display = "block";
+                });
+                document.getElementById("md-content").innerHTML = html;
+                document.getElementById("md-modal").style.display = "block";
                 })
                 .catch(err => {
-                    console.error("Failed to load markdown:", err);
-                    alert("Failed to load the demo guide.");
+                console.error("Failed to load markdown:", err);
+                alert("Failed to load the demo guide.");
                 });
-            });
+            };
+
+            loadGuide();
+
+            const langSelect = document.getElementById("lang-select");
+            langSelect.value = "en";
+            langSelect.onchange = function () {
+            currentLang = this.value;
+            loadGuide();
+            };
+        });
         });
 
         document.addEventListener("click", (e) => {

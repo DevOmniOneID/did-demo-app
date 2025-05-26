@@ -35,7 +35,8 @@
 ## finger_popup
 <img src="./images/finger_popup.png" width="600" height="500"/>
 
-- A popup prompts the user to choose whether to register a fingerprint as an authentication method. Only PIN is supported in this demo.  
+- A popup prompts the user to choose whether to register a fingerprint for signing.  
+- Only PIN registration is supported in this demo.  
 
 ## step3
 <img src="images/step3.png" width="600" height="500"/>
@@ -55,7 +56,7 @@
 
 <img src="./images/main2.png" width="600" height="500"/>
 
-- Once VCs are issued, they are displayed in a list.  
+- Once VCs are issued, they are displayed in a list.
 - This demo includes mDL with ZKP Credential, allowing confirmation of its inclusion.  
 
 - Two buttons are available at the bottom:
@@ -100,7 +101,7 @@
 ## issue_result
 <img src="./images/issue_result.png" width="600" height="500"/>
 
-- VC issuance result is shown to the user.  
+- VC issuance result is shown to the user.
 
 ## select_qr
 <img src="./images/select_qr.png" width="600" height="500"/>
@@ -158,10 +159,6 @@
 
 - View detailed information of the issued National ID.  
 
-## issue_result
-<img src="./images/issue_result.png" width="600" height="500"/>
-
-- VC issuance result is shown to the user.  
 
 ## settings
 <img src="./images/settings.png" width="600" height="500"/>

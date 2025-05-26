@@ -1,6 +1,7 @@
 (function () {
   const version = "v2.0.0.0";
   const basePath = window.location.origin + "/did-demo-app/v2.0.0.0/guide/";
+  let currentLanguage = "en"; // default language
 
   window.addEventListener("DOMContentLoaded", function () {
     const wrapper = document.querySelector(".container-wrapper");
@@ -60,6 +61,7 @@
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         font-family: Arial, sans-serif;
+        position: relative;
       }
       .md-close-button {
         position: absolute;
@@ -82,6 +84,13 @@
       .md-modal-content h1, h2, h3 {
         color: #ed8202;
       }
+      #lang-select {
+        position: absolute;
+        top: 10px;
+        left: 14px;
+        font-size: 14px;
+        padding: 4px;
+      }
     `;
     document.head.appendChild(style);
 
@@ -95,7 +104,7 @@
 
     const guideButton = document.createElement("button");
     guideButton.id = "guide-button";
-    guideButton.title = "demo guide";
+    guideButton.title = "Open demo guide";
 
     const guideImg = document.createElement("img");
     guideImg.src = basePath + "guide_icon.png";
@@ -109,6 +118,10 @@
       <div id="md-modal" style="display:none;">
         <div class="md-modal-backdrop"></div>
         <div class="md-modal-content">
+          <select id="lang-select">
+            <option value="en" selected>English</option>
+            <option value="ko">Korean</option>
+          </select>
           <button class="md-close-button">Close ✕</button>
           <div id="md-content"></div>
         </div>
@@ -116,38 +129,42 @@
     `;
     document.body.insertAdjacentHTML("beforeend", modalHTML);
 
-    guideButton.addEventListener("click", () => {
+    const loadGuide = () => {
       const pathname = window.location.pathname;
       const pageName = pathname.substring(pathname.lastIndexOf('/') + 1);
-    
-      fetch(basePath + "demoapp_detail_guide.md")
-      .then(res => res.text())
-      .then(md => {
-        const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
-        const match = md.match(regex);
-    
-        if (!match) {
-          alert("No guide available for this page.");
-          return;
-        }
-    
-        let section = match[1].trim();
-        section = section.replace(/^##.*\n/, '').trim();
-    
-        let html = marked.parse(section);
-    
-        html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
-          return match.replace(/src=["'][^"']+["']/, `src="${basePath}images/${filename}"`);
+      const mdFile = currentLanguage === "ko" ? "demoapp_detail_guide_ko.md" : "demoapp_detail_guide.md";
+
+      fetch(basePath + mdFile)
+        .then(res => res.text())
+        .then(md => {
+          const regex = new RegExp(`##\\s*${pageName}\\s*\\n([\\s\\S]*?)(?=\\n##\\s|$)`, "i");
+          const match = md.match(regex);
+
+          if (!match) {
+            alert("No guide available for this page.");
+            return;
+          }
+
+          let section = match[1].trim();
+          section = section.replace(/^##.*\n/, '').trim();
+
+          let html = marked.parse(section);
+
+          html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
+            return match.replace(/src=["'][^"']+["']/, `src="${basePath}images/${filename}"`);
+          });
+
+          document.getElementById("md-content").innerHTML = html;
+          document.getElementById("md-modal").style.display = "block";
+        })
+        .catch(err => {
+          console.error("Failed to load markdown:", err);
+          alert("Failed to load the demo guide.");
         });
-    
-        document.getElementById("md-content").innerHTML = html;
-        document.getElementById("md-modal").style.display = "block";
-      })
-      .catch(err => {
-        console.error("Failed to load markdown:", err);
-        alert("Failed to load the demo guide.");
-      });
-    
+    };
+
+    guideButton.addEventListener("click", () => {
+      loadGuide();
     });
 
     document.addEventListener("click", (e) => {
@@ -156,6 +173,13 @@
         e.target.matches(".md-modal-backdrop")
       ) {
         document.getElementById("md-modal").style.display = "none";
+      }
+    });
+
+    document.addEventListener("change", (e) => {
+      if (e.target.id === "lang-select") {
+        currentLanguage = e.target.value;
+        loadGuide();
       }
     });
   });
