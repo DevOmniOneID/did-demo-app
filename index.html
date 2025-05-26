@@ -176,7 +176,7 @@
     <!-- Modal -->
     <div id="md-modal" class="md-modal-backdrop">
         <div class="md-modal-content">
-        <button class="md-close-button">닫기 ✕</button>
+        <button class="md-close-button">Close ✕</button>
         <div id="md-content"></div>
         </div>
     </div>
@@ -226,8 +226,8 @@
                     document.getElementById("md-modal").style.display = "block";
                 })
                 .catch(err => {
-                    console.error("Markdown 로딩 오류:", err);
-                    alert("데모 가이드를 불러오지 못했습니다.");
+                    console.error("Failed to load markdown:", err);
+                    alert("Failed to load the demo guide.");
                 });
             });
         });

@@ -127,28 +127,25 @@
         const match = md.match(regex);
     
         if (!match) {
-          alert("이 페이지에 대한 가이드가 없습니다.");
+          alert("No guide available for this page.");
           return;
         }
     
         let section = match[1].trim();
         section = section.replace(/^##.*\n/, '').trim();
     
-        // 마크다운을 HTML로 렌더링
         let html = marked.parse(section);
     
-        // 🔧 이미지 경로 수동 치환
         html = html.replace(/<img\s+[^>]*src=["'](?!https?:\/\/)(\.\/)?images\/([^"']+)["']/gi, (match, _, filename) => {
           return match.replace(/src=["'][^"']+["']/, `src="${basePath}images/${filename}"`);
         });
     
-        // 모달에 삽입
         document.getElementById("md-content").innerHTML = html;
         document.getElementById("md-modal").style.display = "block";
       })
       .catch(err => {
-        console.error("Markdown 로딩 오류:", err);
-        alert("데모 가이드를 불러오지 못했습니다.");
+        console.error("Failed to load markdown:", err);
+        alert("Failed to load the demo guide.");
       });
     
     });
